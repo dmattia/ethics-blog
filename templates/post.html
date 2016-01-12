@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+	<div class="col s12 row" style="margin-top:20px;">
+		<a href="{% url 'home' %}" class="z-depth-3 btn btn-large white waves-effect col s12 thick blue-text">Back To Posts</a>
+	</div>
+	<div class="col s12 card z-depth-4">
+		<div class="card-content blue-text">
+			<h3>{{ post.title }}</h3>
+			<hr>
+			<div class="thick">
+				{{ post.body }}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
