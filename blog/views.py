@@ -4,7 +4,7 @@ from django.contrib.syndication.views import Feed
 
 def viewBlog(request):
 	params = {
-		'blogs': Blog.objects.order_by('time')
+		'blogs': Blog.objects.order_by('-id') # Order by decreasing id
 	}
 	return render(request, 'blogs.html', params)
 
