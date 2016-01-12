@@ -2,6 +2,8 @@
 
 {% block content %}
 <div class="row">
+
+	<!-- Post Section -->
 	<div class="col s12 row" style="margin-top:20px;">
 		<a href="{% url 'home' %}" class="z-depth-3 btn btn-large white waves-effect col s12 thick blue-text">Back To Posts</a>
 	</div>
@@ -14,5 +16,41 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Add Comment Form -->
+	<h4>Leave a comment:</h4>
+	<form class="col s12" action="/add_comment/{{ post.id }}" method="POST">
+		<div class="row">
+			{% csrf_token %}
+			{{ form.media }}
+			{% for field in form %}
+				<div class="input-field col s12">
+					{{ field.label_tag }}
+					{% ifequal field.auto_id "id_body" %}
+						<textarea name="body" id="{{ field.auto_id }}" class="materialize-textarea"></textarea>
+					{% else %}
+						{{ field }}
+					{% endifequal %}
+				</div>
+			{% endfor %}
+			<input type="submit" class="btn btn-medium waves-effect z-depth-3 white blue-text thick" value="Comment"></input>
+		</div>
+	</form>
+
+	<!-- Comments Section -->
+	{% for comment in comments %}
+	<div class="col s12 card white z-depth-2 row valign-wrapper" style="margin-top:15px;">
+		<div class="col s1">
+			<img class="responsive-img circle" src="/img/default_user.png">
+		</div>
+		<div class="card-content blue-text col s11">
+			<span class="card-title">
+				Comment by: {{ comment.created_by }}
+			</span>
+			<div>When: {{ comment.time }}</div>
+			<div>{{ comment.body | safe }}</div>
+		</div>
+	</div>
+	{% endfor %}
 
 {% endblock %}

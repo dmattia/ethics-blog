@@ -14,4 +14,11 @@ class Blog(models.Model):
 		"""
 		return '/viewPost/%i' % self.id
 
+class Comment(models.Model):
+	post = models.ForeignKey(Blog, null=True)
+	time = models.DateTimeField(auto_now=True, null=True)
+	body = models.TextField(null=True)
+	created_by = models.CharField(max_length=64)
+
 admin.site.register(Blog)
+admin.site.register(Comment)
