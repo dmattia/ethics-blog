@@ -9,4 +9,9 @@ class Blog(models.Model):
 	def __unicode__(self):
 		return unicode('%s' % (self.title))
 
+	def get_absolute_url(self):
+		""" Used to create the link in the RSS Feed
+		"""
+		return '/viewPost/%i' % self.id
+
 admin.site.register(Blog)
